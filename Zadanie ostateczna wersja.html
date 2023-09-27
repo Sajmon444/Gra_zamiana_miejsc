@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>gra</title>
+
+    <style>
+        div {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+        }
+
+        .kwadrat {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="siatka" id="siatka-gry"></div>
+    <br>
+    <button id="reset">Reset</button>
+
+
+    <script>
+        reset()
+        przycisk_reset = document.getElementById("reset");
+        przycisk_reset.addEventListener("click", reset);
+
+        function reset() {
+          
+            var siatka = document.getElementById("siatka-gry");
+            while (siatka.firstChild) {
+                siatka.removeChild(siatka.firstChild);
+            }
+
+        //losowanie
+        var kolor = ["red", "blue", "green"];
+        var stary = [];
+
+        for (var i = 0; i < 9; i++) {
+             var x = 1;
+             while (x) {
+                 var numer = parseInt(Math.random() * 3);
+                 stary[i] = numer;
+                 var ile = 0;
+                for (var j = 0; j < stary.length; j++) {
+                      if (stary[j] == stary[i]) {
+                         ile++;
+                        }
+                if (ile > 3) {
+                     x = 1;
+                break;
+                }
+             }
+            if (ile <= 3) {
+              x = 0;
+              break;
+         }
+    }
+
+    var id = i + 1; 
+    var plansza = document.createElement("div");
+    plansza.className = "kwadrat " + kolor[numer];
+    plansza.id = id;
+    document.getElementById("siatka-gry").appendChild(plansza);
+}
+
+
+        }
+
+        //wybieranie i zamiana
+        var kwadraty = document.querySelectorAll('.kwadrat');
+        var wybrany_kwadrat = null;
+
+        kwadraty.forEach(kwadrat => {
+            kwadrat.addEventListener('click', () => klikniety_kwadrat(kwadrat));
+        });
+
+        function klikniety_kwadrat(kwadrat) {
+            if (!wybrany_kwadrat) {
+                wybrany_kwadrat = kwadrat;
+            } else {
+                Zmiana_kwadratow(wybrany_kwadrat, kwadrat);
+                wybrany_kwadrat = null;
+                sprawdzanieCzerwone()
+                sprawdzanieNiebieskie()
+                sprawdzanieZielone()
+            }
+        }
+
+        function Zmiana_kwadratow(kwadrat1, kwadrat2) {
+            const tempColor = kwadrat1.classList[1];
+            kwadrat1.classList.replace(kwadrat1.classList[1], kwadrat2.classList[1]);
+            kwadrat2.classList.replace(kwadrat2.classList[1], tempColor);
+        }
+
+
+        function sprawdzanieCzerwone() {
+           var demo1 = document.getElementById('1');
+           var demo2 = document.getElementById('2');
+           var demo3 = document.getElementById('3');
+
+             if (demo1.classList.contains('red') && demo2.classList.contains('red') && demo3.classList.contains('red')) {
+                console.log("Czerwone są ułożone");
+            }
+
+            var demo4 = document.getElementById('4');
+           var demo5 = document.getElementById('5');
+           var demo6 = document.getElementById('6');
+
+             if (demo4.classList.contains('red') && demo5.classList.contains('red') && demo6.classList.contains('red')) {
+                console.log("Czerwone są ułożone");
+            }
+
+            var demo7 = document.getElementById('7');
+           var demo8 = document.getElementById('8');
+           var demo9 = document.getElementById('9');
+
+             if (demo7.classList.contains('red') && demo8.classList.contains('red') && demo9.classList.contains('red')) {
+                console.log("Czerwone są ułożone");
+            }
+    }
+
+    function sprawdzanieNiebieskie() {
+           var demo1 = document.getElementById('1');
+           var demo2 = document.getElementById('2');
+           var demo3 = document.getElementById('3');
+
+             if (demo1.classList.contains('blue') && demo2.classList.contains('blue') && demo3.classList.contains('blue')) {
+                console.log("Niebieskie są ułożone");
+            }
+
+            var demo4 = document.getElementById('4');
+           var demo5 = document.getElementById('5');
+           var demo6 = document.getElementById('6');
+
+             if (demo4.classList.contains('blue') && demo5.classList.contains('blue') && demo6.classList.contains('blue')) {
+                console.log("Niebieskie są ułożone");
+            }
+
+            var demo7 = document.getElementById('7');
+           var demo8 = document.getElementById('8');
+           var demo9 = document.getElementById('9');
+
+             if (demo7.classList.contains('blue') && demo8.classList.contains('blue') && demo9.classList.contains('blue')) {
+                console.log("Niebieskie są ułożone");
+            }
+    }
+
+    function sprawdzanieZielone() {
+           var demo1 = document.getElementById('1');
+           var demo2 = document.getElementById('2');
+           var demo3 = document.getElementById('3');
+
+             if (demo1.classList.contains('green') && demo2.classList.contains('green') && demo3.classList.contains('green')) {
+                console.log("zielone są ułożone");
+            }
+
+            var demo4 = document.getElementById('4');
+           var demo5 = document.getElementById('5');
+           var demo6 = document.getElementById('6');
+
+             if (demo4.classList.contains('green') && demo5.classList.contains('green') && demo6.classList.contains('green')) {
+                console.log("zielone są ułożone");
+            }
+
+            var demo7 = document.getElementById('7');
+           var demo8 = document.getElementById('8');
+           var demo9 = document.getElementById('9');
+
+             if (demo7.classList.contains('green') && demo8.classList.contains('green') && demo9.classList.contains('green')) {
+                console.log("zielone są ułożone");
+            }
+    }
+
+    </script>
+</body>
+
+</html>
+
+
