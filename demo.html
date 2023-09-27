@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>gra</title>
+
+    <style>
+        div{
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+        }
+
+        .kwadrat {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="siatka" id="siatka-gry">
+        <!-- Tu będą kwadraty -->
+        <div class="kwadrat red"></div>
+        <div class="kwadrat red"></div>
+        <div class="kwadrat blue"></div>
+        <div class="kwadrat green"></div>
+        <div class="kwadrat green"></div>
+        <div class="kwadrat red"></div>
+        <div class="kwadrat blue"></div>
+        <div class="kwadrat green"></div>
+        <div class="kwadrat blue"></div>
+    </div>
+
+    <script>
+        var kwadraty = document.querySelectorAll('.kwadrat');
+        var wybrany_kwadrat = null;
+
+        kwadraty.forEach(kwadrat => {
+            kwadrat.addEventListener('click', () => klikniety_kwadrat(kwadrat));
+        });
+
+        function klikniety_kwadrat(kwadrat) {
+            if (!wybrany_kwadrat) {
+                wybrany_kwadrat = kwadrat;
+            } else {
+                Zmiana_kwadratow(wybrany_kwadrat, kwadrat);
+                wybrany_kwadrat = null;
+            }
+        }
+
+        function Zmiana_kwadratow(kwadrat1, kwadrat2) {
+            const tempColor = kwadrat1.classList[1];
+            kwadrat1.classList.replace(kwadrat1.classList[1], kwadrat2.classList[1]);
+            kwadrat2.classList.replace(kwadrat2.classList[1], tempColor);
+        }
+    </script>
+</body>
+
+</html>
